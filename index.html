@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CORS API Test</title>
+</head>
+
+<body>
+  <h1>CORS API Test</h1>
+  <button onclick="fetchData()">Fetch Data</button>
+  <div id="result"></div>
+
+  <script>
+    function fetchData() {
+      const requestBody = {
+        "email": "<ADD EMAIL>",
+        "password": "<ADD PASSWORD>"
+      }
+      fetch('http://localhost:8005/api/v1/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(requestBody)
+      })
+        .then(response => response.json())
+        .then(data => {
+          document.getElementById('result').innerText = JSON.stringify(data, null, 2);
+        })
+        .catch(error => {
+          console.error('Error fetching data:', error);
+          document.getElementById('result').innerText = 'Error fetching data. See console for details.';
+        });
+    }
+  </script>
+</body>
+
+</html>
